@@ -1,0 +1,359 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    font-family: 'Orbitron', sans-serif;
+    background: black;
+    overflow: hidden;
+  }
+  
+  /* Matrix canvas */
+  #matrix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  
+  /* Terminal box centered over canvas */
+  .terminal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  
+    background: rgba(10, 10, 10, 0.9);
+    border: 2px solid white;
+    border-radius: 12px;
+    padding: 40px;
+    width: 90%;
+    max-width: 600px;
+    color: #00ffc3;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Styled text */
+  .terminal h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #00ffc3;
+    text-shadow: 0 0 10px #00ffc3, 0 0 20px #00ffc3aa;
+  }
+  
+  .terminal h2 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #00ffc3;
+    text-shadow: 0 0 5px #00ffc3aa;
+  }
+  
+  #ip, #location {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #ffffff;
+    text-shadow: 0 0 4px #ffffffaa;
+  }
+  
+  /* Styled input */
+  input {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: black;
+    border: 2px solid #00ffc3;
+    color: #00ffc3;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 80%;
+    max-width: 300px;
+    outline: none;
+    box-shadow: 0 0 10px #00ffc355;
+  }
+  
+  input:focus {
+    box-shadow: 0 0 15px #00ffc3;
+  }
+  
+  /* Styled button */
+  button {
+    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #000000;
+    background: linear-gradient(135deg, #00ffc3, #00ff99);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 20px #00ffc366;
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px #00ffc3aa;
+  }
+  
+  /* Error message */
+  #message {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #ff5c5c;
+  }
+
+  .access-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 30px;
+  }
+
+  
+  .loading-bar {
+    margin-top: 30px;
+    width: 100%;
+    height: 20px;
+    border: 2px solid #00ffc3;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 10px #00ffc355;
+  }
+  
+  .progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #00ffc3, #00ffcc);
+    transition: width 0.4s ease;
+    box-shadow: 0 0 20px #00ffc3aa;
+  }
+  
+  #progressText {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #00ffc3;
+    text-shadow: 0 0 5px #00ffc3;
+  }
+  
+  .terminal-flash {
+    animation: terminalFlash 1s ease-in-out;
+  }
+  
+  @keyframes terminalFlash {
+    0%   { background-color: black; }
+    30%  { background-color: #00ffc322; }
+    60%  { background-color: black; }
+    100% { background-color: rgba(10, 10, 10, 0.9); }
+  }
+  
+  .hidden {
+    display: none;
+    opacity: 0;
+  }
+  
+  .dots::after {
+    content: '';
+    animation: dots 1s steps(3, end) infinite;
+  }
+  
+  @keyframes dots {
+    0%   { content: ''; }
+    33%  { content: '.'; }
+    66%  { content: '..'; }
+    100% { content: '...'; }
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    text-align: center;
+    color: #00ffc3;
+    text-shadow: 0 0 5px #00ffc3aa;
+    margin: 10px 0;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+  }
+
+  
+h1.hidden {
+    opacity: 0;
+  }
+
+  #cipherText {
+    font-size: 1.6rem;
+    text-align: center;
+    color: #00ffc3;
+    text-shadow: 0 0 5px #00ffc3aa;
+    margin-bottom: 20px;
+    word-wrap: break-word; /* Ensure long text breaks into multiple lines */
+    max-width: 90%; /* Limit the width of the cipher */
+    margin-left: auto;
+    margin-right: auto;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  
+#cipherText:not(.hidden) {
+    opacity: 1;
+}
+  
+  .cipher-input {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .cipher-input input {
+    background-color: #0d0d0d;
+    border: 2px solid #00ffc3;
+    color: #00ffc3;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    width: 250px;
+  }
+  
+  .cipher-input button {
+    background-color: #00ffc3;
+    border: none;
+    color: black;
+    padding: 10px 16px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .cipher-input button:hover {
+    background-color: #0ff;
+    box-shadow: 0 0 10px #00ffc3;
+  }
+
+  #cipherText {
+    font-size: 1.6rem;
+    text-align: center;
+    color: #00ffc3;
+    text-shadow: 0 0 5px #00ffc3aa;
+    margin-bottom: 20px;
+  }
+  
+  .cipher-input {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .cipher-input input {
+    background-color: #0d0d0d;
+    border: 2px solid #00ffc3;
+    color: #00ffc3;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    width: 250px;
+  }
+  
+  .cipher-input button {
+    background-color: #00ffc3;
+    border: none;
+    color: black;
+    padding: 10px 16px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .cipher-input button:hover {
+    background-color: #0ff;
+    box-shadow: 0 0 10px #00ffc3;
+  }
+  
+  .cipher-input button:nth-child(2) {
+    background-color: #ff9500;
+  }
+  
+  .cipher-input button:nth-child(2):hover {
+    background-color: #e67e00;
+  }
+  
+
+  #errorMessage {
+    color: red;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 10px;
+    display: none;
+    text-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red;
+    animation: glow 1.5s infinite alternate;
+  }
+  
+  @keyframes glow {
+    0% {
+      text-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red;
+    }
+    100% {
+      text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
+    }
+  }
+
+/* Add this to your existing CSS */
+
+#qr_code {
+    position: relative;
+    display: inline-block;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* When QR code is displayed */
+  #qr_code.show img {
+    filter: drop-shadow(0px 0px 15px rgba(57, 255, 20, 0.8));  /* Glow effect */
+    animation: glow 1.5s infinite alternate;
+  }
+  
+  /* Animation for glowing effect */
+  @keyframes glow {
+    0% {
+      filter: drop-shadow(0px 0px 15px rgba(57, 255, 20, 0.8));
+    }
+    100% {
+      filter: drop-shadow(0px 0px 25px rgba(57, 255, 20, 1));
+    }
+  }
+  
+  /* Center the QR code container */
+  #qr_code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-bottom: 20px;
+  }
+
+  #hintMessage {
+  margin-top: 12px;
+  display: block;
+}
+
+
+  
+  
+  
+  
+  
+  
+  

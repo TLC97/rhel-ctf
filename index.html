@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome, Meho</title>
+  <link rel="stylesheet" href="index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+
+  <div class="terminal" id="terminal">
+    <div class="access-container" id="accessContainer">
+      <input type="text" id="codeInput" placeholder="Enter access code..." />
+      <button onclick="checkCode()">Access Terminal</button>
+    </div>
+  
+    <div class="content hidden" id="terminalContent">
+      <div id="animatedMessages">
+        <h1 id="welcomeLine1" class="hidden">Welcome, Meho<span class="dots" id="dots1">...</span></h1>
+        <h1 id="welcomeLine2" class="hidden">We have been expecting you<span class="dots" id="dots2">...</span></h1>
+      </div>
+      <p id="ip"></p>
+      <p id="location"></p>
+      <div class="loading-bar">
+        <div class="progress" id="progressBar"></div>
+      </div>
+      <p id="progressText">Loading: 0%</p>
+    </div>
+
+    <div id="cipherSection" class="hidden">
+      <h1 id="cipherText" class="green-text">
+        Q29uZ3JhdHVsYXRpb25zLiBZb3UgaGF2ZSBwYXNzZWQgdGhlIGZpcnN0IHRlc3QuCgpUaGUgY29kZSBpcyAiODQ3NDM2Ig==
+      </h1>
+      
+      <div class="cipher-input">
+        <input type="text" id="cipherInput" placeholder="Enter cipher code..." />
+        
+        <p id="errorMessage" class="hidden text-red-500 mt-2 text-center"></p>
+        
+        <button id="cipherButton" onclick="submitCipher()">Submit</button>
+        <button id="cipherHint" onclick="giveHint()">Hint</button>
+      </div>
+      
+      <div id="qr_code" class="hidden mt-4">
+      </div>
+      
+      <p id="hintMessage" class="mt-2 green-text"></p>
+    </div>
+    
+  </div>
+
+  <!-- QR Code Library -->
+  <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
